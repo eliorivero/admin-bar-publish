@@ -1,0 +1,42 @@
+@media screen and (max-width: 782px) {
+    #wp-toolbar > ul > #wp-admin-bar-sfnAdminBarPublishBtn {
+        display: block;
+
+        .ab-item {
+            text-indent: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 52px;
+            padding: 0;
+            color: #a0a5aa;
+            position: relative;
+
+            &:before {
+                display: block;
+                text-indent: 0;
+                font: normal 32px/1 dashicons;
+                speak: none;
+                top: 7px;
+                width: 52px;
+                text-align: center;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+    }
+}
+#wp-admin-bar-sfnAdminBarPublishBtn {
+    & > .ab-item:before {
+        top: 2px;
+        content: "\f342";
+        transition: transform .2s ease-out;
+    }
+    
+    &.draft > .ab-item:before {
+        transform:rotateZ(45deg);
+    }
+    
+    &.publish > .ab-item:before {
+        transform:rotateZ(225deg);
+    }
+}
