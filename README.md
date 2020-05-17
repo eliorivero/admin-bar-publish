@@ -1,4 +1,7 @@
 # Admin Bar Publish
+
+![Admin Bar Publish](https://i2.wp.com/startfunction.com/wp-content/uploads/2020/05/admin-bar-publish.png?w=2160&ssl=1)
+
 Set post status to publish or draft from the front end using the WordPress REST API.
 
 This Plugin extends the Admin Bar by adding a button that allows to publish an entry from the front end.
