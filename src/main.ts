@@ -67,6 +67,7 @@ export const adminBarPublishInit = (): boolean => {
 			.then( res => {
 				if ( ! res.ok ) {
 					alert( sfnAdminBarPublish.httpError + res.status );
+					adminBarButton.parentNode.removeChild( adminBarButton );
 					throw new Error( sfnAdminBarPublish.httpError + res.status );
 				}
 				return res.json();

@@ -4,8 +4,34 @@
  *
  * @since 1.0.0
  */
+defined( 'ABSPATH' ) || exit;
 
 add_action( 'rest_api_init', 'startfunction_admin_bar_publish_endpoint' );
+
+/**
+ * Check if the current user is allowed to access the endpoints.
+ * 
+ * @since 1.0.0
+ * 
+ * @return bool
+ */
+function startfuction_admin_bar_publish_permission() {
+	if ( current_user_can( 'edit_others_posts' ) ) {
+		return true;
+	}
+
+	return new WP_Error(
+		'sfn_admin_bar_publish_invalid_user_permission',
+		esc_html__(
+			'You do not have the correct user permissions to perform this action.
+			Please contact your site admin if you think this is a mistake.',
+			'admin-bar-publish'
+		),
+		array(
+			'status' => is_user_logged_in() ? 403 : 401 
+		)
+	);
+}
 
 /**
  * Register endpoint to change the post status
@@ -15,7 +41,8 @@ add_action( 'rest_api_init', 'startfunction_admin_bar_publish_endpoint' );
 function startfunction_admin_bar_publish_endpoint() {
 	register_rest_route( 'startfunction/v1', '/admin-bar/publish/', array(
 		'methods' => WP_REST_Server::CREATABLE,
-		'callback' => 'startfunction_admin_bar_transition',
+		'permission_callback' => 'startfuction_admin_bar_publish_permission',
+		'callback' => 'startfunction_admin_bar_publish_transition',
 		'args'     => array(
 			'post_id' => array(
 				'required' => true,
@@ -36,7 +63,7 @@ function startfunction_admin_bar_publish_endpoint() {
  * 
  * @return WP_REST_RESPONSE $response
  */
-function startfunction_admin_bar_transition( WP_REST_Request $request ) {
+function startfunction_admin_bar_publish_transition( WP_REST_Request $request ) {
 	$post_id = $request->get_param( 'post_id' );
 	$post_status = get_post_status( $post_id );
 	// Let's make sure it's only draft or publish to continue

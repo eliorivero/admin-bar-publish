@@ -19,20 +19,21 @@ defined( 'ABSPATH' ) || exit;
 define( 'ADMIN_BAR_PUBLISH_VERSION', '1.0.0' );
 define( '__ADMIN_BAR_PUBLISH__', __FILE__ );
 
-// Load endpoints
-require_once 'endpoints.php';
-
-add_action( 'plugins_loaded', 'admin_bar_publish_localization' );
-add_action( 'wp_before_admin_bar_render', 'admin_bar_publish_menu' );
-add_action( 'wp_enqueue_scripts', 'admin_bar_publish_menu_enqueue' );
+add_action( 'plugins_loaded', 'admin_bar_publish_load' );
 
 /**
- * Initialize localization routines
+ * Initialize plugin
  *
  * @since 1.0.0
  */
-function admin_bar_publish_localization() {
-	load_plugin_textdomain( 'admin-bar-publish', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+function admin_bar_publish_load() {
+	if ( current_user_can( 'edit_others_posts' ) ) {
+		load_plugin_textdomain( 'admin-bar-publish', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		// Load endpoints
+		require_once 'endpoints.php';
+		add_action( 'wp_before_admin_bar_render', 'admin_bar_publish_menu' );
+		add_action( 'wp_enqueue_scripts', 'admin_bar_publish_menu_enqueue' );
+	}
 }
 
 /**
@@ -90,7 +91,7 @@ function admin_bar_publish_menu_enqueue() {
 			nonce: "' . wp_create_nonce( 'wp_rest' ) . '",
 			postId: ' . $post_id . ',
 			postStatus: "' . get_post_status( $post_id ) . '",
-			httpError: "' . esc_html__( 'HTTP Error:', 'admin-bar-publish' ) . '",
+			httpError: "' . esc_html__( 'HTTP Error', 'admin-bar-publish' ) . ': ",
 			working: "' . esc_html__( 'Working…', 'admin-bar-publish' ) . '",
 			publish: "' . esc_html__( 'Draft', 'admin-bar-publish' ) . '",
 			draft: "' . esc_html__( 'Publish', 'admin-bar-publish' ) . '",

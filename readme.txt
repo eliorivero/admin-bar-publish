@@ -4,6 +4,7 @@ Tags: publish, post, page
 Stable tag: 1.0.0
 Requires at least: 5.0
 Tested up to: 5.4.1
+License: GPLv2 or later
 
 Extends Admin Bar by allowing to publish or draft from the front end.
 
