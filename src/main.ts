@@ -88,7 +88,7 @@ export const adminBarPublishInit = (): boolean => {
  * @param {object} res The server response after drafting or publshing a post.
  */
 export const adminBarPublishHandleResponse = ( res: SFNAdminBarPublishResponse, adminBarButton: Element ) => {
-	alert( res.message );
+	window.alert( res.message );
 	if ( [ 'draft', 'publish' ].includes( res.postStatus ) ) {
 		adminBarButton.textContent = sfnAdminBarPublish[ res.postStatus ];
 		(<Element>adminBarButton.parentNode).classList.add( res.postStatus );

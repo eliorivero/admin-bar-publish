@@ -7,11 +7,12 @@ const adminBarButton = {
     firstChild: 'Publish',
 };
 
-beforeAll(() => {
-    jest.clearAllMocks();
-});
 
 describe( 'Initialization', () => {
+    beforeEach(() => {
+        global.sfnAdminBarPublish = undefined;  // Define it globally for the tests
+    });
+    
     test( 'if sfnAdminBarPublish is undefined, checks if the Admin Bar button is there and removes it', () => {
         const mockRemoveChild = jest.fn();
         const mockQuerySelector = jest.spyOn(document, 'querySelector').mockImplementation( () => Object.assign( {}, adminBarButton, {
@@ -81,15 +82,14 @@ describe( 'Response handling', () => {
         },
     } );
 
-    beforeAll(() => {
-        sfnAdminBarPublish = {
+    beforeEach(() => {
+        global.sfnAdminBarPublish = {
             postStatus: 'draft',
             publish: 'Draft',
             draft: 'Publish',
         };
         adminBarPublishHandleResponse( res, adminBarButtonToUpdate );
     });
-
 
     test( 'shows message', () => {
         expect( mockAlert ).toHaveBeenCalled();
