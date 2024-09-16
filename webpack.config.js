@@ -1,7 +1,7 @@
 const path = require( 'path' );
-const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' );
+const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
-const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const webpackConfig = {
 	mode: process.env.NODE_ENV || 'development',
 	entry: {
@@ -36,7 +36,7 @@ const webpackConfig = {
 		]
 	},
 	optimization: {
-		minimizer: [ new OptimizeCSSAssetsPlugin( {} ), new UglifyJsPlugin() ],
+		minimizer: [ new CssMinimizerPlugin(), new TerserPlugin() ],
 	},
 	plugins: [
 		new MiniCssExtractPlugin( { filename: '../css/admin-bar-publish.css' } ),
