@@ -1,6 +1,6 @@
 # Admin Bar Publish
 
-![Admin Bar Publish](https://i2.wp.com/startfunction.com/wp-content/uploads/2020/05/admin-bar-publish.png?w=2160&ssl=1)
+![Admin Bar Publish](admin-bar-publish.png)
 
 Set post status to publish or draft from the front end.
 
