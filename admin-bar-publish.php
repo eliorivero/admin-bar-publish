@@ -3,7 +3,7 @@
  * Plugin Name: Admin Bar Publish
  * Plugin URI: https://startfunction.com/admin-bar-publish
  * Description: Adds a button to the front end admin bar to instantly publish a post.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Elio Rivero
  * Author URI: https://startfunction.com
  * License: GPLv2 or later
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ADMIN_BAR_PUBLISH_VERSION', '1.0.0' );
+define( 'ADMIN_BAR_PUBLISH_VERSION', '1.0.1' );
 define( '__ADMIN_BAR_PUBLISH__', __FILE__ );
 
 add_action( 'plugins_loaded', 'admin_bar_publish_load' );
