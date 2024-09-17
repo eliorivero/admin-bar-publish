@@ -5,7 +5,8 @@
   "main": "admin-bar-publish.js",
   "scripts": {
     "test": "jest",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "pack": "cp -R css js *.php *.txt LICENSE $1"
   },
   "author": "Elio Rivero",
   "license": "GPL-2.0-or-later",
